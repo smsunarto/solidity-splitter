@@ -109,11 +109,10 @@ contract Splitter is Ownable, Pausable {
 
         address[] memory _receivers = getReceivers();
 
+        emit LogSplit(_receivers, msg.value / _receivers.length);
         for (uint256 i = 0; i < _receivers.length; i++) {
             address payable _receiver = address(uint160(_receivers[i]));
             _receiver.transfer(msg.value / _receivers.length);
         }
-
-        emit LogSplit(_receivers, msg.value / _receivers.length);
     }
 }
